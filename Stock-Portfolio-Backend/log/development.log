@@ -1795,3 +1795,1218 @@ FOREIGN KEY ("user_id")
   [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:06:46.027970"], ["updated_at", "2020-05-05 20:06:46.027970"]]
   [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (120.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_development"[0m
+  [1m[35m (121.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_test"[0m
+  [1m[35m (273.7ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (273.2ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6216444988420769655)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20200504222559)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200504222559"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactions (20200505182859)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200505182859"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStocks (20200505183917)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200505183917"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddStockToTransactions (20200505185612)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD "stock_id" bigint NOT NULL[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200505185612"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:09:50.234504"], ["updated_at", "2020-05-05 20:09:50.234504"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6216444988420769655)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$mxR7z3M3wG5E8xKwboT1hejANasVxSi3LgJv3iaf58I.Ay2ngXBoS"], ["created_at", "2020-05-05 20:10:49.820842"], ["updated_at", "2020-05-05 20:10:49.820842"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$//M52NhQHorPidLyFZuZse/ZwY7laAnmgdSshjtk.xxfF9LwsZ5Iq"], ["created_at", "2020-05-05 20:10:50.004388"], ["updated_at", "2020-05-05 20:10:50.004388"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$AukkaYDkROmrV3zFyonZcuD3InLeaSw272alb9jfdCH9AKE0MgwKO"], ["created_at", "2020-05-05 20:10:50.181286"], ["updated_at", "2020-05-05 20:10:50.181286"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$NCdPIF4uW9bLW8ZMoTRQse9QjTLQXlm6ybtI8fjPaT/cC0rm.yNOq"], ["created_at", "2020-05-05 20:10:50.360612"], ["updated_at", "2020-05-05 20:10:50.360612"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:10:50.369759"], ["updated_at", "2020-05-05 20:10:50.369759"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:10:50.373828"], ["updated_at", "2020-05-05 20:10:50.373828"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:10:50.377494"], ["updated_at", "2020-05-05 20:10:50.377494"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (1.0ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 1], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:10:50.395402"], ["updated_at", "2020-05-05 20:10:50.395402"], ["stock_id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:10:50.408637"], ["updated_at", "2020-05-05 20:10:50.408637"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 1], ["sale_type", "sell"], ["created_at", "2020-05-05 20:10:50.411924"], ["updated_at", "2020-05-05 20:10:50.411924"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Destroy (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 3]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 1]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 2]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 3]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$dajW00K9uoBicTEclAmZDeZixNLNajOpIE.1Nb/0Sp7B0HxocKq/i"], ["created_at", "2020-05-05 20:12:48.452432"], ["updated_at", "2020-05-05 20:12:48.452432"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$MW3xeYo8qJM/KczXOY/5M.uFW3svh6jpwiuMN7YLX/pfXaOzi4kpa"], ["created_at", "2020-05-05 20:12:48.639570"], ["updated_at", "2020-05-05 20:12:48.639570"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$5S5rYgmCK3OjwFof4DCTW.OW.aEpIbXm7JpnZbMFO.XNYjRMfN7pe"], ["created_at", "2020-05-05 20:12:48.817592"], ["updated_at", "2020-05-05 20:12:48.817592"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$zJ.8eKAr5xPRFpNhSseOR.Hc74QyhUvJF5P8dJx6Mh1PuWgZBaAR2"], ["created_at", "2020-05-05 20:12:48.995543"], ["updated_at", "2020-05-05 20:12:48.995543"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:12:48.999945"], ["updated_at", "2020-05-05 20:12:48.999945"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:12:49.004037"], ["updated_at", "2020-05-05 20:12:49.004037"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:12:49.007771"], ["updated_at", "2020-05-05 20:12:49.007771"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.6ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 5], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:12:49.012350"], ["updated_at", "2020-05-05 20:12:49.012350"], ["stock_id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 6], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:12:49.015835"], ["updated_at", "2020-05-05 20:12:49.015835"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 5], ["sale_type", "sell"], ["created_at", "2020-05-05 20:12:49.018737"], ["updated_at", "2020-05-05 20:12:49.018737"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (125.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_development"[0m
+  [1m[35m (124.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_test"[0m
+  [1m[35m (283.1ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (278.6ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:13:58.633704"], ["updated_at", "2020-05-05 20:13:58.633704"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:13:58.639949"], ["updated_at", "2020-05-05 20:13:58.639949"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:13:58.723414"], ["updated_at", "2020-05-05 20:13:58.723414"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.3ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-05-05 20:13:58.728990"], ["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:13:58.733101"], ["updated_at", "2020-05-05 20:13:58.733101"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$qz5.S9wRGRdq75jiP.oEduAOA.uKXy0QqY2ocMYXAzGiePonkx/Ii"], ["created_at", "2020-05-05 20:13:58.971087"], ["updated_at", "2020-05-05 20:13:58.971087"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$CntSguQseXysD7kwUNWXQ.MtK6LpceKjBFh4HcmGGUvcmpsXwGozu"], ["created_at", "2020-05-05 20:13:59.153379"], ["updated_at", "2020-05-05 20:13:59.153379"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$5WYrGdgJRfZY5PTSdfWzkezZ2I6So/dxv6whUHAT3goHKCTF1iO9W"], ["created_at", "2020-05-05 20:13:59.334298"], ["updated_at", "2020-05-05 20:13:59.334298"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$r354SQeOjJ16pqSGcIfwF.eP4q06wv0EYnVmIFEj6g563/3HzTO.K"], ["created_at", "2020-05-05 20:13:59.521203"], ["updated_at", "2020-05-05 20:13:59.521203"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:13:59.529958"], ["updated_at", "2020-05-05 20:13:59.529958"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:13:59.532917"], ["updated_at", "2020-05-05 20:13:59.532917"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:13:59.535735"], ["updated_at", "2020-05-05 20:13:59.535735"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (1.0ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "0.0"], ["quantity", 1], ["sale_total", "300.92"], ["user_id", 1], ["sale_type", ""], ["created_at", "2020-05-05 20:13:59.547126"], ["updated_at", "2020-05-05 20:13:59.547126"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 1], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:13:59.560507"], ["updated_at", "2020-05-05 20:13:59.560507"], ["stock_id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:13:59.563606"], ["updated_at", "2020-05-05 20:13:59.563606"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 1], ["sale_type", "sell"], ["created_at", "2020-05-05 20:13:59.566587"], ["updated_at", "2020-05-05 20:13:59.566587"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.4ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 3]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 1]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 2]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 3]]
+  [1m[36mStock Destroy (0.5ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$sZs7DVhq.lKEM8euxxfqeuxooW/7Atl9oT66nwIieD.l.5jekgBWu"], ["created_at", "2020-05-05 20:14:08.916527"], ["updated_at", "2020-05-05 20:14:08.916527"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$OHVnwOZ9euT5r1NDoTJCUeR3/TRYWTECApE3jmYkqEkXeeAbRA0Za"], ["created_at", "2020-05-05 20:14:09.093996"], ["updated_at", "2020-05-05 20:14:09.093996"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$.Dm0cByCghbEfLSOeATEHOwPJdflqTCyH48qZwxFBz3HjHOlyicga"], ["created_at", "2020-05-05 20:14:09.283190"], ["updated_at", "2020-05-05 20:14:09.283190"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$yuKLfdBWRMNLtr0V5WPSRuJZYhS51hgJa.JKaqpir74NjqajS5PRW"], ["created_at", "2020-05-05 20:14:09.460798"], ["updated_at", "2020-05-05 20:14:09.460798"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:14:09.464136"], ["updated_at", "2020-05-05 20:14:09.464136"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:14:09.466991"], ["updated_at", "2020-05-05 20:14:09.466991"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:14:09.469375"], ["updated_at", "2020-05-05 20:14:09.469375"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "0.0"], ["quantity", 1], ["sale_total", "300.92"], ["user_id", 5], ["sale_type", ""], ["created_at", "2020-05-05 20:14:09.472510"], ["updated_at", "2020-05-05 20:14:09.472510"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 5], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:14:09.475289"], ["updated_at", "2020-05-05 20:14:09.475289"], ["stock_id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 6], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:14:09.477780"], ["updated_at", "2020-05-05 20:14:09.477780"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 5], ["sale_type", "sell"], ["created_at", "2020-05-05 20:14:09.480170"], ["updated_at", "2020-05-05 20:14:09.480170"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 8]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 5]]
+  [1m[36mUser Destroy (0.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 6]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 7]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 8]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 8]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 4]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 5]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 6]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$TDBg5vYYcxvnE0pcR3auQ.mOxoq8h7GngmVcXHuxhAMXevM6uz.62"], ["created_at", "2020-05-05 20:15:33.132195"], ["updated_at", "2020-05-05 20:15:33.132195"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$emAHWBLCjdkHIY4d8qgKm.P/tYjdKEH80LJrWfRYgPkOUes4nN6PC"], ["created_at", "2020-05-05 20:15:33.321469"], ["updated_at", "2020-05-05 20:15:33.321469"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$nKfnuTq0uj4qyBn5Mb0Sy.EHYHI0J8PpGwSqzL.DL.YvvJ3mxB9IG"], ["created_at", "2020-05-05 20:15:33.512546"], ["updated_at", "2020-05-05 20:15:33.512546"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$nsBPWeVT/LZvnO9r.LAzGOW8rQic68MBl5agb5bR0TxYnO4ysrJiO"], ["created_at", "2020-05-05 20:15:33.691359"], ["updated_at", "2020-05-05 20:15:33.691359"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:15:33.694643"], ["updated_at", "2020-05-05 20:15:33.694643"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:15:33.697167"], ["updated_at", "2020-05-05 20:15:33.697167"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:15:33.699406"], ["updated_at", "2020-05-05 20:15:33.699406"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "0.0"], ["quantity", 1], ["sale_total", "300.92"], ["user_id", 9], ["sale_type", ""], ["created_at", "2020-05-05 20:15:33.702402"], ["updated_at", "2020-05-05 20:15:33.702402"], ["stock_id", 7]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 9], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:15:33.705090"], ["updated_at", "2020-05-05 20:15:33.705090"], ["stock_id", 9]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 10], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:15:33.707439"], ["updated_at", "2020-05-05 20:15:33.707439"], ["stock_id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 9], ["sale_type", "sell"], ["created_at", "2020-05-05 20:15:33.709799"], ["updated_at", "2020-05-05 20:15:33.709799"], ["stock_id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 9]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 10]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 11]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 12]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 9]]
+  [1m[36mUser Destroy (0.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 9]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 10]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 10]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 11]]
+  [1m[36mUser Destroy (0.4ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 11]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 12]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 12]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.5ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 7]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 8]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 8]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 9]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 9]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$jUVp5g8/BHmmcqS.ASozKOFmz6xxjIHb/J3tXOsHwPb4bFaM7w6OK"], ["created_at", "2020-05-05 20:16:14.660456"], ["updated_at", "2020-05-05 20:16:14.660456"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$J18KUYcYh8mz51QUBdhsRu13fE6/NKOzhFoAUdlpnyGDoacIP2V9K"], ["created_at", "2020-05-05 20:16:14.842175"], ["updated_at", "2020-05-05 20:16:14.842175"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$dVjf2eJW5Lfz8M3y7bqNVeGiGDBFiExAfldpEmZQ1sTr.z5NyYKIC"], ["created_at", "2020-05-05 20:16:15.029944"], ["updated_at", "2020-05-05 20:16:15.029944"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$YRyHt0dxQArru.2dJ3OoQu7lSLZeRxMv/jBLbU9kBBx2hhwzGFJ3O"], ["created_at", "2020-05-05 20:16:15.209390"], ["updated_at", "2020-05-05 20:16:15.209390"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:16:15.213111"], ["updated_at", "2020-05-05 20:16:15.213111"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:16:15.216266"], ["updated_at", "2020-05-05 20:16:15.216266"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:16:15.220040"], ["updated_at", "2020-05-05 20:16:15.220040"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.6ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 13], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:16:15.227925"], ["updated_at", "2020-05-05 20:16:15.227925"], ["stock_id", 12]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 14], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:16:15.232060"], ["updated_at", "2020-05-05 20:16:15.232060"], ["stock_id", 10]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 13], ["sale_type", "sell"], ["created_at", "2020-05-05 20:16:15.235530"], ["updated_at", "2020-05-05 20:16:15.235530"], ["stock_id", 10]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (126.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_development"[0m
+  [1m[35m (126.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_test"[0m
+  [1m[35m (281.1ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (281.3ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:17:28.711148"], ["updated_at", "2020-05-05 20:17:28.711148"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:17:28.717717"], ["updated_at", "2020-05-05 20:17:28.717717"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:17:28.795943"], ["updated_at", "2020-05-05 20:17:28.795943"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-05-05 20:17:28.801055"], ["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:17:28.805083"], ["updated_at", "2020-05-05 20:17:28.805083"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$iyeO1TWSpYXBSbWfg.b2Lu4N65tR5s23R.NzUoOabhOMJEeoHzUdC"], ["created_at", "2020-05-05 20:17:29.046719"], ["updated_at", "2020-05-05 20:17:29.046719"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$8GngJMTBV6NReh/wZ/iKzOEHjvw80cRSxjKNrM9vOOpFKLERUtszO"], ["created_at", "2020-05-05 20:17:29.244364"], ["updated_at", "2020-05-05 20:17:29.244364"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$cwy3m1HhxV0EYvjnTmYwXuU0F7a3H3ahEZPL4L.nQqY.2q0PomoTi"], ["created_at", "2020-05-05 20:17:29.435306"], ["updated_at", "2020-05-05 20:17:29.435306"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$xDCmA8NX9mhDPy2cfQn1AOAasKBqaLkWRU1iWOQNUZcqGoahnhwbW"], ["created_at", "2020-05-05 20:17:29.630042"], ["updated_at", "2020-05-05 20:17:29.630042"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:17:29.639411"], ["updated_at", "2020-05-05 20:17:29.639411"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:17:29.642481"], ["updated_at", "2020-05-05 20:17:29.642481"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:17:29.645228"], ["updated_at", "2020-05-05 20:17:29.645228"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.8ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 1], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:17:29.658228"], ["updated_at", "2020-05-05 20:17:29.658228"], ["stock_id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:17:29.661695"], ["updated_at", "2020-05-05 20:17:29.661695"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 1], ["sale_type", "sell"], ["created_at", "2020-05-05 20:17:29.664366"], ["updated_at", "2020-05-05 20:17:29.664366"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$FWHJkNUwiSb6FnjVNFBIL./ZRzEzm.AeA3x7KRkOQ6wKW.ppTgSee"], ["created_at", "2020-05-05 20:19:17.404272"], ["updated_at", "2020-05-05 20:19:17.404272"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (125.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_development"[0m
+  [1m[35m (128.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_test"[0m
+  [1m[35m (267.3ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (273.9ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:19:47.336321"], ["updated_at", "2020-05-05 20:19:47.336321"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:19:47.342845"], ["updated_at", "2020-05-05 20:19:47.342845"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:19:47.425087"], ["updated_at", "2020-05-05 20:19:47.425087"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-05-05 20:19:47.430050"], ["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:19:47.434112"], ["updated_at", "2020-05-05 20:19:47.434112"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$CJL4MnuDfN/iyraVnIq6f.uNsoHhBiQ0z8.RePW26bJ7Er9S4RNFm"], ["created_at", "2020-05-05 20:19:47.677960"], ["updated_at", "2020-05-05 20:19:47.677960"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$WIV2RNrXo7vDvj0pSEGnA.okfbBpTQysTQrw3lBikDfCXwSaKWTmm"], ["created_at", "2020-05-05 20:19:47.862568"], ["updated_at", "2020-05-05 20:19:47.862568"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$DC1PwKnO6fibC/JEeNH5QujMq.0oiFld0rvHdicUIcf3akj9Rw/Ym"], ["created_at", "2020-05-05 20:19:48.041684"], ["updated_at", "2020-05-05 20:19:48.041684"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$5qcXRQLA.duXSjgFJK80OOLYislTeqM1U30k/4DnSw1O2ze6VEzQa"], ["created_at", "2020-05-05 20:19:48.221015"], ["updated_at", "2020-05-05 20:19:48.221015"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:19:48.230912"], ["updated_at", "2020-05-05 20:19:48.230912"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:19:48.235032"], ["updated_at", "2020-05-05 20:19:48.235032"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:19:48.238854"], ["updated_at", "2020-05-05 20:19:48.238854"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.9ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 1], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:19:48.257713"], ["updated_at", "2020-05-05 20:19:48.257713"], ["stock_id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:19:48.261370"], ["updated_at", "2020-05-05 20:19:48.261370"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 1], ["sale_type", "sell"], ["created_at", "2020-05-05 20:19:48.264462"], ["updated_at", "2020-05-05 20:19:48.264462"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 3]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 1]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 2]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 3]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$GcHxCZ9C9PBOpgvCFbJS5.cjgbbX79Ihidgr4UEktVpi4IqmnpwH6"], ["created_at", "2020-05-05 20:20:53.486874"], ["updated_at", "2020-05-05 20:20:53.486874"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$NOpdh3dTku6udwGjOWpLceuB8SrttMfjJBMoAWJjS1XP29UN/ju9a"], ["created_at", "2020-05-05 20:20:53.665419"], ["updated_at", "2020-05-05 20:20:53.665419"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$lbNF40ePw.zxrufXjffdG.zNWtVRniHX1wGLt59G9DToj3/WA3hAq"], ["created_at", "2020-05-05 20:20:53.851811"], ["updated_at", "2020-05-05 20:20:53.851811"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$f5UWw597.xIUTDCTSxVZOOREQabRzVt4Kfhw76gqhJuBcQnT3NmGa"], ["created_at", "2020-05-05 20:20:54.037007"], ["updated_at", "2020-05-05 20:20:54.037007"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:20:54.042291"], ["updated_at", "2020-05-05 20:20:54.042291"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:20:54.046456"], ["updated_at", "2020-05-05 20:20:54.046456"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:20:54.050269"], ["updated_at", "2020-05-05 20:20:54.050269"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.6ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 1], ["sale_total", "300.92"], ["user_id", 5], ["sale_type", "buy"], ["created_at", "2020-05-05 20:20:54.053752"], ["updated_at", "2020-05-05 20:20:54.053752"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 5], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:20:54.057250"], ["updated_at", "2020-05-05 20:20:54.057250"], ["stock_id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 6], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:20:54.060253"], ["updated_at", "2020-05-05 20:20:54.060253"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 5], ["sale_total", "1504.6"], ["user_id", 5], ["sale_type", "sell"], ["created_at", "2020-05-05 20:20:54.063056"], ["updated_at", "2020-05-05 20:20:54.063056"], ["stock_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.4ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Destroy (0.2ms)[0m  [1m[31mDELETE FROM "transactions" WHERE "transactions"."id" = $1[0m  [["id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 5]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 6]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 7]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."user_id" = $1[0m  [["user_id", 8]]
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 8]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 4]]
+  [1m[36mStock Destroy (0.4ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 5]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."stock_id" = $1[0m  [["stock_id", 6]]
+  [1m[36mStock Destroy (0.3ms)[0m  [1m[31mDELETE FROM "stocks" WHERE "stocks"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$SaX3khvRmG1olhE2w65g2uNl.JYY/WQPT0.f9A9BE.G1PawHq5noq"], ["created_at", "2020-05-05 20:21:07.904882"], ["updated_at", "2020-05-05 20:21:07.904882"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$Apa5ubXmu9zYJhwS6tNUC.PYOWIaQvXYO5fl80s4U2Wpae9/EgOKK"], ["created_at", "2020-05-05 20:21:08.092576"], ["updated_at", "2020-05-05 20:21:08.092576"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$Al2ebKc7U2c8tmf2KIDg1OBNPXs305RvO8MFjXZicwzBTzS5OTZuK"], ["created_at", "2020-05-05 20:21:08.274674"], ["updated_at", "2020-05-05 20:21:08.274674"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$GjxGijbnFm459auzGrW5Se/2ulR6Pa8GVmbmUeTjoaFlkJY4Mx9HK"], ["created_at", "2020-05-05 20:21:08.451101"], ["updated_at", "2020-05-05 20:21:08.451101"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.3ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:21:08.456101"], ["updated_at", "2020-05-05 20:21:08.456101"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:21:08.459902"], ["updated_at", "2020-05-05 20:21:08.459902"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:21:08.463959"], ["updated_at", "2020-05-05 20:21:08.463959"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 9], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:21:08.466791"], ["updated_at", "2020-05-05 20:21:08.466791"], ["stock_id", 9]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 10], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:21:08.469946"], ["updated_at", "2020-05-05 20:21:08.469946"], ["stock_id", 7]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mStock Load (0.5ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (125.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_development"[0m
+  [1m[35m (126.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_test"[0m
+  [1m[35m (280.3ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (277.5ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:22:39.485119"], ["updated_at", "2020-05-05 20:22:39.485119"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:22:39.493465"], ["updated_at", "2020-05-05 20:22:39.493465"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:22:39.572104"], ["updated_at", "2020-05-05 20:22:39.572104"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-05-05 20:22:39.576921"], ["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:22:39.581039"], ["updated_at", "2020-05-05 20:22:39.581039"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$tUOaIHKXvcem2B65dKfn5OhI8e/0yAkcjmrZYTWR1eBd.3GudlKHa"], ["created_at", "2020-05-05 20:22:39.814422"], ["updated_at", "2020-05-05 20:22:39.814422"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$eahuevSav8pWlqUIiFWd0.K7vo4z.OMybqA2XWVXz/iB0eJNbYQBC"], ["created_at", "2020-05-05 20:22:39.995941"], ["updated_at", "2020-05-05 20:22:39.995941"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$BdemQ8xHUMH4GMyNLttuQ.985dM53lMiJeKtTN2YCdxWojMBpHJKu"], ["created_at", "2020-05-05 20:22:40.173956"], ["updated_at", "2020-05-05 20:22:40.173956"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$GVlDc4qqbH2haLljvmT/r.zBKm7lebXlpxXow4oUSo5WtTLTFsDX."], ["created_at", "2020-05-05 20:22:40.350205"], ["updated_at", "2020-05-05 20:22:40.350205"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:22:40.359946"], ["updated_at", "2020-05-05 20:22:40.359946"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:22:40.364240"], ["updated_at", "2020-05-05 20:22:40.364240"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:22:40.368260"], ["updated_at", "2020-05-05 20:22:40.368260"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.9ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 1], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:22:40.385197"], ["updated_at", "2020-05-05 20:22:40.385197"], ["stock_id", 3]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:22:40.389690"], ["updated_at", "2020-05-05 20:22:40.389690"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (1.2ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 1], ["sale_total", "300.92"], ["user_id", 1], ["sale_type", "SELL"], ["created_at", "2020-05-05 20:23:16.291788"], ["updated_at", "2020-05-05 20:23:16.291788"], ["stock_id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (123.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_development"[0m
+  [1m[35m (126.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Stock_Portfolio_Backend_test"[0m
+  [1m[35m (279.9ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (280.2ms)[0m  [1m[35mCREATE DATABASE "Stock_Portfolio_Backend_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:23:27.457171"], ["updated_at", "2020-05-05 20:23:27.457171"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:23:27.463140"], ["updated_at", "2020-05-05 20:23:27.463140"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "stocks" CASCADE[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" bigserial primary key, "company_name" character varying, "symbol" character varying, "day_open_price" decimal, "current_price" decimal, "day_close_price" decimal, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "sale_price" decimal, "quantity" integer, "balance_before_transaction" decimal, "sale_total" decimal, "user_id" bigint NOT NULL, "sale_type" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "stock_id" bigint NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_stock_id" ON "transactions"  ("stock_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_transactions_on_user_id" ON "transactions"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "name" character varying, "account_balance" decimal, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_f1235b9a65"
+FOREIGN KEY ("stock_id")
+  REFERENCES "stocks" ("id")
+[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_77364e6416"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200505185612)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200504222559),
+(20200505182859),
+(20200505183917);
+
+[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-05-05 20:23:27.545669"], ["updated_at", "2020-05-05 20:23:27.545669"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.3ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-05-05 20:23:27.552243"], ["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "161bf3f6e22414bea0492d97e3c17b5e16119f22"], ["created_at", "2020-05-05 20:23:27.557152"], ["updated_at", "2020-05-05 20:23:27.557152"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions"[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mStock Load (0.3ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "g@g.com"], ["name", "greg"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$KUe8uEDLouuJXck/akjlVeEttlPNykfKKk92ZcMzssU1qGbr7ODEy"], ["created_at", "2020-05-05 20:23:27.793937"], ["updated_at", "2020-05-05 20:23:27.793937"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "a@a.com"], ["name", "ally"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$cJE/hIKbOXASBUS51TOLOOJXIGierBu.vJiKLmz5/w3h.CgHSESAO"], ["created_at", "2020-05-05 20:23:27.976000"], ["updated_at", "2020-05-05 20:23:27.976000"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "b@b.com"], ["name", "bob"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$EIAlm3qAXk/n6Y8GK7OvPObmqf3EGNQCwPBDancTFJIsWRkmW8ZEW"], ["created_at", "2020-05-05 20:23:28.156595"], ["updated_at", "2020-05-05 20:23:28.156595"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "c@c.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "name", "account_balance", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "c@c.com"], ["name", "cal"], ["account_balance", "5000.0"], ["password_digest", "$2a$12$0rvOpazJkgEiTRQzR5BOwONMk8XRm423m504uAihDMaL6R2Ur/pZS"], ["created_at", "2020-05-05 20:23:28.341189"], ["updated_at", "2020-05-05 20:23:28.341189"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Apple Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "AAPL"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Apple Inc"], ["symbol", "AAPL"], ["day_open_price", "295.06"], ["current_price", "300.92"], ["created_at", "2020-05-05 20:23:28.355629"], ["updated_at", "2020-05-05 20:23:28.355629"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "The Walt Disney Company"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "DIS"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "The Walt Disney Company"], ["symbol", "DIS"], ["day_open_price", "101.51"], ["current_price", "101.38"], ["created_at", "2020-05-05 20:23:28.360531"], ["updated_at", "2020-05-05 20:23:28.360531"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."company_name" = $1 LIMIT $2[0m  [["company_name", "Netflix,Inc"], ["LIMIT", 1]]
+  [1m[36mStock Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "stocks" WHERE "stocks"."symbol" = $1 LIMIT $2[0m  [["symbol", "NFLX"], ["LIMIT", 1]]
+  [1m[36mStock Create (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("company_name", "symbol", "day_open_price", "current_price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["company_name", "Netflix,Inc"], ["symbol", "NFLX"], ["day_open_price", "427.55"], ["current_price", "428.61"], ["created_at", "2020-05-05 20:23:28.364966"], ["updated_at", "2020-05-05 20:23:28.364966"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.9ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "427.55"], ["quantity", 5], ["sale_total", "2137.75"], ["user_id", 1], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:23:28.382483"], ["updated_at", "2020-05-05 20:23:28.382483"], ["stock_id", 3]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:23:28.386262"], ["updated_at", "2020-05-05 20:23:28.386262"], ["stock_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
