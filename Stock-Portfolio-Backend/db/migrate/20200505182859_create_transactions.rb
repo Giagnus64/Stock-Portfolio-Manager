@@ -6,7 +6,7 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
       t.decimal :balance_before_transaction
       t.decimal :sale_total
       t.belongs_to :user, null: false, foreign_key: true
-      t.string :type
+      t.string :sale_type
       
 
       t.timestamps

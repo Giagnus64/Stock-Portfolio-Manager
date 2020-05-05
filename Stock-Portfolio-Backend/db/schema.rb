@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_183917) do
+ActiveRecord::Schema.define(version: 2020_05_05_185612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,9 +31,11 @@ ActiveRecord::Schema.define(version: 2020_05_05_183917) do
     t.decimal "balance_before_transaction"
     t.decimal "sale_total"
     t.bigint "user_id", null: false
-    t.string "type"
+    t.string "sale_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "stock_id", null: false
+    t.index ["stock_id"], name: "index_transactions_on_stock_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -46,5 +48,6 @@ ActiveRecord::Schema.define(version: 2020_05_05_183917) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "transactions", "stocks"
   add_foreign_key "transactions", "users"
 end
