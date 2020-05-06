@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     def create
         #get new params
         new_user_params = user_params
+        new_user_params[:account_balance] = 5000.00
         #create new user
         user = User.create(new_user_params)
         if(user.valid?)

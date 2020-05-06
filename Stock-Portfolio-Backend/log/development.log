@@ -3010,3 +3010,11 @@ FOREIGN KEY ("user_id")
   [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("sale_price", "quantity", "sale_total", "user_id", "sale_type", "created_at", "updated_at", "stock_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["sale_price", "300.92"], ["quantity", 10], ["sale_total", "3009.2"], ["user_id", 2], ["sale_type", "BUY"], ["created_at", "2020-05-05 20:23:28.386262"], ["updated_at", "2020-05-05 20:23:28.386262"], ["stock_id", 1]]
   [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.4ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" ORDER BY "stocks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
