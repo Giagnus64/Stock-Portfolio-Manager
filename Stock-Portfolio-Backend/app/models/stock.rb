@@ -15,6 +15,11 @@ class Stock < ApplicationRecord
     
     def self.get_quote(stock)
         response = RestClient.get("#{URL}stock/#{stock.symbol}/quote?token=#{SECRET}")
-        
+        parsed = JSON.parse(response)
+    end
+    
+    #to test
+    def update_stock(stock_info)
+        self.day_open_price = stock_info["open_price"]
     end
 end

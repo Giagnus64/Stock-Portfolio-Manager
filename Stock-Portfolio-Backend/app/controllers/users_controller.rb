@@ -26,15 +26,12 @@ class UsersController < ApplicationController
 
     #show user portfolio
     def show
-        user
+        user = User.find_by(email: user_params[:email])
     end
 
-    def update
-    #update user money when a transaction is made
-    end
 
 #    #Extra methods if time permits
-#     def edit
+#     def edit/update
     
 #     end
 
