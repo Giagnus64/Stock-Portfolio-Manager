@@ -15,6 +15,7 @@ class Stock < ApplicationRecord
         response = RestClient.get("#{TEST_URL}stock/#{stock_symbol}/quote?token=#{TEST_SECRET}")
         parsed = JSON.parse(response)
         Stock.handle_stock(parsed)
+        return parsed["open"]
     end
 
     #think of batch requests later

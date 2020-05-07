@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     #show user portfolio
     def show
         user = User.find(params[:id])
-        render json: user.as_json
+        
     end
 
 
