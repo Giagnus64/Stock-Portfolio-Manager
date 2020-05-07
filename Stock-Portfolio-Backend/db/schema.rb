@@ -10,31 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_185612) do
+ActiveRecord::Schema.define(version: 2020_05_07_044431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "stocks", force: :cascade do |t|
     t.string "company_name"
-    t.string "symbol"
+    t.string "stock_symbol"
     t.decimal "day_open_price"
-    t.decimal "current_price"
     t.decimal "day_close_price"
+    t.decimal "current_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "transactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "stock_id", null: false
+    t.string "sale_type"
     t.decimal "sale_price"
     t.integer "quantity"
-    t.decimal "balance_before_transaction"
     t.decimal "sale_total"
-    t.bigint "user_id", null: false
-    t.string "sale_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "stock_id", null: false
     t.index ["stock_id"], name: "index_transactions_on_stock_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
@@ -42,8 +41,8 @@ ActiveRecord::Schema.define(version: 2020_05_05_185612) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "name"
-    t.decimal "account_balance"
     t.string "password_digest"
+    t.decimal "account_balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

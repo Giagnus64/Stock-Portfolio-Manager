@@ -1,25 +1,50 @@
-require 'rest-client'
 class Stock < ApplicationRecord
-
     has_many :transactions, dependent: :destroy
     has_many :users, through: :transactions
 
     validates :company_name, presence:true, uniqueness:true
-    validates :symbol, presence:true, uniqueness:true
+    validates :stock_symbol, presence:true, uniqueness:true
     
     
     
-    SECRET = ENV["TEST_API_SECRET"]
+    TEST_SECRET = ENV["TEST_API_SECRET"]
 
-    URL = "https://sandbox.iexapis.com/stable/"
+    TEST_URL = "https://sandbox.iexapis.com/stable/"
     
-    def self.get_quote(stock)
-        response = RestClient.get("#{URL}stock/#{stock.symbol}/quote?token=#{SECRET}")
+    def get_quote
+        response = RestClient.get("#{TEST_URL}stock/#{self.stock_symbol}/quote?token=#{TEST_SECRET}")
         parsed = JSON.parse(response)
+        stock_info = Stock.handle_stock(parsed)
     end
+
+    #think of batch requests later
+    # def self.get_quote(stock)
+    #     response = RestClient.get("#{TEST_URL}stock/#{stock.stock_symbol}/quote?token=#{TEST_SECRET}")
+    #     #response = RestClient.get("#{TEST_URL}stock/#{stock.stock_symbol}/quote?token=#{SECRET}")
+    #     parsed = JSON.parse(response)
+    # end
     
-    #to test
-    def update_stock(stock_info)
-        self.day_open_price = stock_info["open_price"]
+    #handle new stocks or update stocks
+    def self.handle_stock(stock_info)
+        stock = Stock.find_by(stock_symbol:stock_info["symbol"])
+        if stock
+            Stock.update_stock_prices(stock, stock_info)
+        else
+            Stock.create_new_stock(stock_info)
+        end
+        
     end
+
+    def self.create_new_stock(stock_info)
+        new_stock = Stock.create(stock_symbol:stock_info["symbol"],day_open_price:stock_info["open"], current_price:stock_info["iexRealtimePrice"], company_name: stock_info["companyName"], day_close_price:stock_info["close"])
+    end
+
+
+    def self.update_stock_prices(stock, stock_info)
+        stock.update(day_open_price:stock_info["open"], current_price:stock_info["iexRealtimePrice"], day_close_price:stock_info["close"])
+        stock
+    end
+
+    
+
 end

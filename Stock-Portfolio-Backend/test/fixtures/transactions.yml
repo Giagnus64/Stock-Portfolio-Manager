@@ -1,19 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sale_price: MyString
-  decimal: MyString
-  quantity: 1
-  balance_before_transaction: 9.99
-  sale_total: 9.99
   user: one
-  type: 
+  stock: one
+  sale_type: MyString
+  sale_price: 9.99
+  quantity: 1
+  sale_total: 9.99
 
 two:
-  sale_price: MyString
-  decimal: MyString
-  quantity: 1
-  balance_before_transaction: 9.99
-  sale_total: 9.99
   user: two
-  type: 
+  stock: two
+  sale_type: MyString
+  sale_price: 9.99
+  quantity: 1
+  sale_total: 9.99

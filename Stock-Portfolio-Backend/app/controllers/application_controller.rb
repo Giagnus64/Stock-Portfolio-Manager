@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    #before_action :authorized
+    before_action :authorized
 
 
     def secret
@@ -39,4 +39,5 @@ class ApplicationController < ActionController::API
     def authorized
         render json: { messages: ['Please log in'] }, status: :unauthorized unless logged_in?
     end
+
 end

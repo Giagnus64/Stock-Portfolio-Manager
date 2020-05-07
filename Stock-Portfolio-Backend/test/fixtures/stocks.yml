@@ -2,14 +2,14 @@
 
 one:
   company_name: MyString
-  symbol: MyString
+  stock_symbol: MyString
   day_open_price: 9.99
-  current_price: 9.99
   day_close_price: 9.99
+  current_price: 9.99
 
 two:
   company_name: MyString
-  symbol: MyString
+  stock_symbol: MyString
   day_open_price: 9.99
-  current_price: 9.99
   day_close_price: 9.99
+  current_price: 9.99

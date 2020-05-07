@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-
-    #skip_before_action :authorized, only:[:create]
+     skip_before_action :authorized, only:[:create]
 
     #create new user
     def create
@@ -26,7 +25,10 @@ class UsersController < ApplicationController
 
     #show user portfolio
     def show
-        user = User.find_by(email: user_params[:email])
+        user = User.find(params[:id])
+        portfolio = user.get_portfolio
+        render json: portfolio
+        
     end
 
 
@@ -44,6 +46,4 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:email, :password, :name)
     end
-    
-
 end
