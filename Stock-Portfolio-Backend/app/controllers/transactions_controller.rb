@@ -24,6 +24,7 @@ class TransactionsController < ApplicationController
             new_trans = Transaction.create(new_trans_params)
             if(new_trans.valid?)
                 found_user.update_account_balance(new_trans_params[:sale_total])
+                #update user_stocks
                 trans_json = new_trans.as_json
                 trans_json[:new_user_account_balance] = transaction_details[:new_user_balance]
                 render json: trans_json, status: :created

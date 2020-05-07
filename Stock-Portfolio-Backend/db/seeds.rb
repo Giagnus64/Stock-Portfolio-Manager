@@ -23,4 +23,4 @@ netflix = Stock.create(company_name:"Netflix,Inc", stock_symbol:"NFLX", day_open
 t1 = Transaction.create(user:u1, stock:apple, quantity: 1, sale_type:"BUY", sale_price:300.92, sale_total:300.92)
 t2 = Transaction.create(user:u1, stock:netflix, quantity: 5, sale_type:"BUY", sale_price:427.55, sale_total:(427.55 * 5))
 t3 = Transaction.create(user:u2, stock:apple, quantity:10, sale_type:"BUY", sale_price:300.92, sale_total:(300.92 * 10))
-t4 = Transaction.create(user:u3, stock:apple, quantity: 3, sale_type:"BUY", sale_price:300.92, sale_total:(300.92*5))
+t4 = Transaction.create(user:u1, stock:apple, quantity: 3, sale_type:"BUY", sale_price:300.92, sale_total:(300.92*5))
