@@ -1,11 +1,9 @@
-require 'rest-client'
 class Stock < ApplicationRecord
-
     has_many :transactions, dependent: :destroy
     has_many :users, through: :transactions
 
     validates :company_name, presence:true, uniqueness:true
-    validates :symbol, presence:true, uniqueness:true
+    validates :stock_symbol, presence:true, uniqueness:true
     
     
     
@@ -14,7 +12,7 @@ class Stock < ApplicationRecord
     URL = "https://sandbox.iexapis.com/stable/"
     
     def self.get_quote(stock)
-        response = RestClient.get("#{URL}stock/#{stock.symbol}/quote?token=#{SECRET}")
+        response = RestClient.get("#{URL}stock/#{stock.stock_symbol}/quote?token=#{SECRET}")
         parsed = JSON.parse(response)
     end
     

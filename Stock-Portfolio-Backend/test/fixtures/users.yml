@@ -3,11 +3,11 @@
 one:
   email: MyString
   name: MyString
-  account_balance: 9.99
   password_digest: MyString
+  account_balance: 9.99
 
 two:
   email: MyString
   name: MyString
-  account_balance: 9.99
   password_digest: MyString
+  account_balance: 9.99
