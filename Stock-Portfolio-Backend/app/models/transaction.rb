@@ -21,7 +21,7 @@ class Transaction < ApplicationRecord
     stock = Stock.find(stock_id)
     transaction_details[:sale_price] = stock.current_price
     transaction_details[:sale_total] = transaction_details[:sale_price] * quantity
-    transaction_details[:new_user_balance] = transaction_details[:account_balance] - transaction_details[:sale_total]
+    transaction_details[:new_user_balance] = transaction_details[:user_balance] - transaction_details[:sale_total]
     transaction_details
   end
 end

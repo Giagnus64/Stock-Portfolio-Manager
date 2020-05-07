@@ -8,5 +8,9 @@ class User < ApplicationRecord
     validates :email, uniqueness:true, presence:true
     validates :account_balance, presence:true
 
-
+    def update_account_balance(sale_total)
+        current_balance = self.account_balance
+        new_balance = current_balance - sale_total
+        self.update(account_balance: new_balance)
+    end
 end
