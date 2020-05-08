@@ -12,7 +12,7 @@ class UsersController < ApplicationController
             #generate auth token
             token = encode_token({user_id: user.id})
             #generate user hash
-            userHash = user.as_json(only: [:id, :email])
+            userHash = user.as_json(only: [:id, :name])
             #add token to hash
             userHash[:token] = token
             #respond with user's info as json

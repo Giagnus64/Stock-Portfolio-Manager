@@ -23,7 +23,6 @@ const loginUser = (creds) => {
                     dispatch({ type: 'LOGIN_USER_STORE', loginCreds: data })
                 } else{
                     dispatch({ type: 'LOGIN_ERROR', errors: data.messages })
-
                 }
 
             })
@@ -65,6 +64,7 @@ const createUser = (creds) => {
 
 const logoutUser = () => {
     localStorage.clear()
+    
     return (dispatch) => {
         dispatch({type: "LOGOUT_USER"})
     }

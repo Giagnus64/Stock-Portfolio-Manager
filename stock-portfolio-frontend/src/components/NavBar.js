@@ -1,25 +1,49 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Menu } from "semantic-ui-react";
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {logoutUser} from '../actions/loginActions';
 
-const NavBar = () => {
+class NavBar extends Component {
 
-    const navItems = () => {
-        // if(this.state.token){
-        //   return (<>
-        //     <NavLink to="/profile"><Menu.Item name='Profile' /></NavLink>
-        //     <NavLink to="/home"><Menu.Item name='Relationships'/></NavLink>
-        //     <NavLink to="/dates"><Menu.Item name='Dates'/></NavLink>
-        //     <Menu.Item name='Logout' onClick={this.logout}/>
-        //     <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.state.currentUser.first_name + " " + this.state.currentUser.last_name}`}</Menu.Item>
-        //     </>)
-        // }
-      }
-    return(
-        <Menu inverted className="top" id="navbar">
-        <Menu.Item header>Stock Portfolio Manager</Menu.Item>
-        {navItems()}
-      </Menu>
-    )
+    handleClick = (e, logout = false) => {
+        if(logout){
+            this.props.logoutUser();
+        }
+    }
+
+    navItems = () => {
+        if(this.props.isLoggedIn){
+          return (
+              <>
+            <Menu.Item className="header-welcome" id="header-username">{`Logged in as ${this.props.name}`}</Menu.Item>
+            <NavLink to="/login"><Menu.Item name='Logout' onClick={(e) => this.handleClick(e, true)}/></NavLink></>
+            )
+            
+        }
+    }
+    render(){
+        return(
+            <Menu inverted className="top" id="navbar">
+            <Menu.Item header>Stock Portfolio Manager</Menu.Item>
+            <NavLink to="/home"><Menu.Item name='Portfolio'/></NavLink>
+            <NavLink to="/transactions"><Menu.Item name='Transactions'/></NavLink>
+            
+            {this.navItems()}
+          </Menu>
+        )
+
+    }
 }
-export default NavBar
+
+const mapStateToProps = (state, props) => {
+    return {name: state.name, isLoggedIn: state.isLoggedIn}
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        logoutUser: () => dispatch(logoutUser)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

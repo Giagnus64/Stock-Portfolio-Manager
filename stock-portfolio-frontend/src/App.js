@@ -7,7 +7,9 @@ import NavBar from './components/NavBar';
 import LoginPage from './containers/LoginPage';
 
 class App extends Component {
+
   render(){
+      
     return (
       <div className="App">
         <NavBar/>
@@ -21,20 +23,17 @@ class App extends Component {
                 <Redirect to='/home' /> :
                 <LoginPage />}
           />
-          home has portfolio and buy stock elements
           <Route
             path='/home'
             exact
             render={() => localStorage.token ? <></> : <Redirect to='login'/>}
           />
-          {/* <Route
-           transactions has list of transactions
+          <Route
             path='/transactions'
-
             exact
             render={() => localStorage.token ?
-              <RecipePage openRecipeModal={this.openRecipeModal}  /> : <Redirect to='/login' />}
-          /> */}
+              <></> : <Redirect to='/login' />}
+          />
           <Route
             exact
             path='/'
@@ -42,7 +41,6 @@ class App extends Component {
               <Redirect to="/home" /> :
               <Redirect to='/login' />}
           />
-
         </Switch>
         </div>
       </div>
@@ -52,9 +50,9 @@ class App extends Component {
 }
 const mapStateToProps = (state, props) => {
 
-    return { token:state.token, user_id: state.user_id, name: state.username, email:state.email }
+    return { token:state.token, user_id: state.user_id, name: state.name, errors:state.errors }
   }
-  const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch, props) => {
     return {
       logoutUser: () => dispatch(logoutUser),
     }

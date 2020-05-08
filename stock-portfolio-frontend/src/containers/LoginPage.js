@@ -6,14 +6,12 @@ import {loginUser, logoutUser, createUser } from '../actions/loginActions';
 
 
 class LoginPage extends Component{
-    
-
 
     render() {
         return (
             <div className="loginContainer">
                 <Card className="login-card">
-                <LoginForm loginUser={this.props.loginUser} createUser={this.props.createUser}/>
+                <LoginForm loginUser={this.props.loginUser} createUser={this.props.createUser} toggleNav={this.props.toggleNav}/>
                 </Card>
             </div>
         )
