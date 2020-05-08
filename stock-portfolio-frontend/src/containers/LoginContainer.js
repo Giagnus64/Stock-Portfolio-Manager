@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from "react";
 import {Card, Menu} from 'semantic-ui-react';
-import Register from '../components/register'
+import LoginForm from '../components/LoginForm';
 
 
 class LoginContainer extends Component{
 
     state = {
-        first_name: '',
-        last_name: '',
-        username: '',
+        name: '',
+        email: '',
         password: '',
         formStatus: 'register'
     }
@@ -22,15 +21,14 @@ class LoginContainer extends Component{
         event.preventDefault()
         this.props.loginUser(this.state)
         this.setState({
-          first_name: '',
-          last_name: '',
-          username: '',
+          email:'',
+          name: '',
           password: ''
         })
     }
 
     changeForm = (event) => {
-        this.props.removeFormError();
+        //this.props.removeFormError();
         this.setState({
             formStatus: event.target.dataset.name
         })
@@ -48,7 +46,7 @@ class LoginContainer extends Component{
                     </Menu.Item>
                 </Menu>
                 <Card className="login-card">
-                <Register formState={this.state} errorState={this.props.currLogin.formError} errorText={this.props.currLogin.formErrorText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+                <LoginForm formState={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 </Card>
             </div>
         )
