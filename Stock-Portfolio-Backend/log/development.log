@@ -7091,3 +7091,924 @@ Processing by UsersController#show as */*
 Completed 200 OK in 507ms (Views: 0.5ms | ActiveRecord: 25.4ms | Allocations: 46483)
 
 
+Started GET "/58358be09c656243a4ca.hot-update.json" for 127.0.0.1 at 2020-05-08 01:41:27 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/58358be09c656243a4ca.hot-update.json"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/login" for 127.0.0.1 at 2020-05-08 01:41:27 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:06 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:24 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:24 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:25 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:25 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:25 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:25 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:26 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:26 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:26 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:28 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:28 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:29 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:29 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started OPTIONS "/login" for 127.0.0.1 at 2020-05-08 01:47:29 -0400
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/login"):
+  
+actionpack (6.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:00 -0400
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (5.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 38ms (Views: 0.2ms | ActiveRecord: 26.4ms | Allocations: 4019)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:01 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 746)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:03 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 746)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:03 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@gg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@gg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@gg"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:03 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:05 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg."], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 746)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:05 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.c", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.c", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg.c"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:05 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.co", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.co", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg.co"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:06 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:15 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@gg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@gg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@gg.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 746)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:15 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 401 Unauthorized in 225ms (Views: 0.1ms | ActiveRecord: 4.6ms | Allocations: 5291)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:51:15 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:41 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 401 Unauthorized in 203ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 834)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:44 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@gg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@gg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@gg.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:45 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:47 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@gg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@gg.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@gg.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:47 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 401 Unauthorized in 200ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 834)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:53 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 401 Unauthorized in 203ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 834)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:53 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 401 Unauthorized in 192ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 834)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-05-08 01:52:53 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 202 Accepted in 191ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1013)
+
+
+Started POST "/login" for ::1 at 2020-05-08 01:59:47 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 835)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:00 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 731)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:01 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 3ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:01 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:02 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@gg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@gg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@gg"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:02 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:02 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg."], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:02 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.c", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.c", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg.c"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:04 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg.", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg.", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg."], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:04 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@ggg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@ggg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@ggg"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:04 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@gg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@gg", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@gg"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:06 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:06 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:06 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:00:06 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 14ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 732)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:01:03 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 730)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:01:30 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 729)
+
+
+Started POST "/users" for ::1 at 2020-05-08 02:01:57 -0400
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"register"}}
+[31mUnpermitted parameter: :formStatus[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 7640)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:02:05 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/users" for ::1 at 2020-05-08 02:02:07 -0400
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"register"}}
+[31mUnpermitted parameter: :formStatus[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 6031)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:03:01 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:03:07 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:03:13 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:03:25 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:03:57 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 729)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:04:42 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"", "password"=>"[FILTERED]", "name"=>"", "login"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>""}}
+[31mUnpermitted parameters: :name, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+Completed 401 Unauthorized in 2ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 725)
+
+
+Started POST "/users" for ::1 at 2020-05-08 02:08:58 -0400
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"email"=>"", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"register"}}
+[31mUnpermitted parameter: :formStatus[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `create'
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 1.1ms | Allocations: 6026)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:09:52 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 202 Accepted in 202ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 997)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:11:21 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 202 Accepted in 204ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 996)
+
+
+Started POST "/login" for ::1 at 2020-05-08 02:12:34 -0400
+Processing by LoginController#create as JSON
+  Parameters: {"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login", "login"=>{"email"=>"g@g.com", "password"=>"[FILTERED]", "name"=>"", "formStatus"=>"login"}}
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "g@g.com"], ["LIMIT", 1]]
+  ↳ app/controllers/login_controller.rb:5:in `create'
+[31mUnpermitted parameters: :name, :formStatus, :login[0m
+Completed 202 Accepted in 216ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 997)
+
+
